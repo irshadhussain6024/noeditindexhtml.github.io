@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/" />
+  <meta charset="UTF-8" />
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+  <meta name="description" content="A new Flutter project." />
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="admin" />
+  <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <title>BMS Dashboard</title>
+  <link rel="manifest" href="manifest.json" />
+<!--  <link rel="stylesheet" href="./styles.css">-->
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
+    import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkavhdr9vk64o5cTH0cDeI-WYX1T5kukM",
+      authDomain: "bms-firestore-24abb.firebaseapp.com",
+      projectId: "bms-firestore-24abb",
+      storageBucket: "bms-firestore-24abb.appspot.com",
+      messagingSenderId: "935400477886",
+      appId: "1:935400477886:web:1e5166fd81b15740b4faef",
+      measurementId: "G-BMYLL1GR32"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const storage = getStorage(app);
+  </script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("flutter-first-frame", function () {
+        navigator.serviceWorker.register("flutter_service_worker.js");
+      });
+    }
+  </script>
+
+  <!-- Network Info -->
+  <script>
+    function getNetworkInfo() {
+      if ('connection' in navigator) {
+        return {
+          type: navigator.connection.effectiveType,
+          downlink: navigator.connection.downlink,
+          rtt: navigator.connection.rtt
+        };
+      }
+      return null;
+    }
+  </script>
+  <script>
+    window.onload = () => {
+      if (typeof checkLocationPermission === 'function' && typeof requestLocationPermission === 'function') {
+        console.log('Location permission functions are loaded.');
+      } else {
+        console.log('Error: Location permission functions are not loaded.');
+      }
+    };
+  </script>
+  <script>
+    window.flutterWebRenderer = "canvaskit"; // Or "html"
+    window.process = { env: { NODE_ENV: 'production' } };
+  </script>
+
+  <!-- Loading Indicator Styling -->
+  <style>
+    body {
+      background: #000;
+    }
+    #load {
+      position: absolute;
+      width: 600px;
+      height: 36px;
+      left: 50%;
+      top: 40%;
+      margin-left: -300px;
+      overflow: visible;
+      user-select: none;
+      cursor: default;
+    }
+    #load div {
+      position: absolute;
+      width: 20px;
+      height: 36px;
+      opacity: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      animation: move 2s linear infinite;
+      transform: rotate(180deg);
+      color: #35c4f0;
+    }
+    #load div:nth-child(2) { animation-delay: 0.2s; }
+    #load div:nth-child(3) { animation-delay: 0.4s; }
+    #load div:nth-child(4) { animation-delay: 0.6s; }
+    #load div:nth-child(5) { animation-delay: 0.8s; }
+    #load div:nth-child(6) { animation-delay: 1s; }
+    #load div:nth-child(7) { animation-delay: 1.2s; }
+
+    @keyframes move {
+      0% { left: 0; opacity: 0; }
+      35% { left: 41%; transform: rotate(0deg); opacity: 1; }
+      65% { left: 59%; transform: rotate(0deg); opacity: 1; }
+      100% { left: 100%; transform: rotate(-180deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+<!-- Loading Indicator -->
+<div id="load">
+  <div>G</div>
+  <div>N</div>
+  <div>I</div>
+  <div>D</div>
+  <div>A</div>
+  <div>O</div>
+  <div>L</div>
+</div>
+
+<!-- Main Content -->
+<h2>Network Info</h2>
+<div id="ip">Fetching IP...</div>
+
+<!-- Firebase Integration -->
+<script src="main.dart.js" defer></script>
+<!--<script src="popup.js" defer></script>-->
+<!--<script src="js/location_permissions.js"></script>-->
+<!--<script src="background.js"></script>-->
+
+<!-- Remove Loading Indicator -->
+<script>
+  window.onload = function () {
+    setTimeout(function () {
+      var loadingIndicator = document.getElementById("load");
+      if (loadingIndicator) {
+        loadingIndicator.remove();
+      }
+    }, 10000);
+  };
+</script>
+</body>
+</html>
+
